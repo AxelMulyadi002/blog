@@ -10,14 +10,6 @@ const Page = () => {
 	const [val, setVal] = useState([]);
 	const [page, setPage] = useState(1);
 
-	const getFetch = async () => {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&pagination[page]=${page}&pagination[pageSize]=3&sort=id:desc`
-		);
-		const data = await response.json();
-		setVal(data);
-	};
-
 	const scrollTop = () => {
 		scrollTo({
 			top: 0,
@@ -27,9 +19,14 @@ const Page = () => {
 
 	useEffect(() => {
 		scrollTop();
-	}, [page]);
 
-	useEffect(() => {
+		const getFetch = async () => {
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&pagination[page]=${page}&pagination[pageSize]=3&sort=id:desc`
+			);
+			const data = await response.json();
+			setVal(data);
+		};
 		getFetch();
 	}, [page]);
 

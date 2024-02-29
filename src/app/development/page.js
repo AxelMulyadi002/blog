@@ -11,7 +11,7 @@ const Page = () => {
 
 	const getFetch = async () => {
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&pagination[page]=${page}&pagination[pageSize]=3&sort=id:desc&filters[field][$eq]=development`
+			`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&filters[field][$eq]=development`
 		);
 		const data = await response.json();
 		setVal(data);

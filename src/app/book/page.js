@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 
 const Page = () => {
 	const [val, setVal] = useState([]);
-	const [page, setPage] = useState(1);
+	// const [page, setPage] = useState(1);
 
 	const getFetch = async () => {
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&pagination[page]=${page}&pagination[pageSize]=3&sort=id:desc&filters[field][$eq]=book`
+			`${process.env.NEXT_PUBLIC_API_BLOG}?populate=*&sort=id:desc&filters[field][$eq]=book`
 		);
 		const data = await response.json();
 		setVal(data);
@@ -26,11 +26,12 @@ const Page = () => {
 
 	useEffect(() => {
 		scrollTop();
+		getFetch();
 	}, []);
 
-	useEffect(() => {
-		getFetch();
-	}, [page]);
+	// useEffect(() => {
+	// 	getFetch();
+	// }, [page]);
 
 	return (
 		<div className="mt-10">
